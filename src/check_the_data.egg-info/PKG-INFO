@@ -1,0 +1,86 @@
+Metadata-Version: 2.4
+Name: check-the-data
+Version: 0.1.0
+Summary: Quick descriptive statistics for Polars DataFrames exported to Excel
+License: MIT
+Project-URL: Homepage, https://github.com/pradeepmav/check_the_data
+Project-URL: Repository, https://github.com/pradeepmav/check_the_data
+Project-URL: Issues, https://github.com/pradeepmav/check_the_data/issues
+Keywords: polars,data-analysis,descriptive-statistics,excel,data-science
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Scientific/Engineering :: Information Analysis
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: polars>=0.20.0
+Requires-Dist: pandas>=1.5.0
+Requires-Dist: xlsxwriter>=3.0.0
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: black; extra == "dev"
+Requires-Dist: flake8; extra == "dev"
+Dynamic: license-file
+
+# check-the-data
+
+Quick descriptive statistics for [Polars](https://pola.rs/) DataFrames — exported to Excel in one call.
+
+Built for Machine Learning / Data Science workflows where you need a rapid, comprehensive statistical profile of every column: data type, missing values, distinct values, min/max, mean, median, mode, and missing percentage.
+
+## Features
+
+- Works with large files (> 200 GB) via Polars
+- One-shot Excel output with polished table formatting
+- Automatic fallback to Pandas / CSV if Excel write fails
+- Handles numeric and non-numeric columns safely
+
+## Installation
+
+```bash
+pip install check-the-data
+```
+
+Or install from source:
+
+```bash
+git clone https://github.com/pradeepmav/check_the_data.git
+cd check_the_data
+pip install -e .
+```
+
+## Usage
+
+```python
+import polars as pl
+import check_the_data
+
+# Load your data
+df = pl.read_csv("your_data.csv")
+
+# Generate descriptive statistics
+result = check_the_data.fact_check_of_the_data(
+    dataframe=df,
+    output_dir="./reports",
+    workbook_name="data_profile"
+)
+print(result)
+```
+
+## Requirements
+
+- Python >= 3.9
+- polars >= 0.20.0
+- pandas >= 1.5.0 (fallback)
+- xlsxwriter >= 3.0.0
+
+## License
+
+MIT
